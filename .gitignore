@@ -23,6 +23,7 @@
 
 log/
 target/
+dependency-reduced-pom\.xml
 
 ###################
 # Compiled source #

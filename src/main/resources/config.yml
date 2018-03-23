@@ -1,0 +1,9 @@
+database: # Our Mongo credentials
+  name: celestial
+  address: localhost
+  port: 27017
+  auth:
+    enabled: false
+    authDb: admin
+    username: "zach"
+    password: "thegoat"
