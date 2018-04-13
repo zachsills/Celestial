@@ -1,13 +1,14 @@
 package me.hulipvp.celestial.factions.claim;
 
 import lombok.Getter;
+import me.hulipvp.celestial.util.LocationUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**
  *
  * Our {@link Claim} class that will be used to claim territory for Factions
- * and detect if certain locations are inside of the {@link Claim}<br>
+ * and detect if certain locations are inside of the {@link Claim}
  *
  */
 public class Claim {
@@ -38,7 +39,7 @@ public class Claim {
 
     @Override
     public String toString() {
-        return "";
+        return LocationUtils.serializeLocation(cornerOne) + ":" + LocationUtils.serializeLocation(cornerTwo);
     }
 
     @Override
@@ -47,6 +48,6 @@ public class Claim {
             return false;
 
         final Claim otherClaim = (Claim) obj;
-        return otherClaim.getCornerOne() == cornerTwo && otherClaim.getCornerTwo() == cornerTwo;
+        return otherClaim.getCornerOne() == cornerOne && otherClaim.getCornerTwo() == cornerTwo;
     }
 }

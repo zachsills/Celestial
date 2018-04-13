@@ -8,5 +8,5 @@ public enum FactionType {
     PLAYER,
     ROAD,
     SYSTEM,
-    WARZONE
+    WARZONE;
 }

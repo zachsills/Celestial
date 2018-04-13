@@ -6,19 +6,22 @@
 
     <groupId>me.hulipvp.celestial</groupId>
     <artifactId>Celestial</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-DEV</version>
     <packaging>jar</packaging>
     <description>Celestial means goat.</description>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.main>${project.groupId}.${project.artifactId}</project.main>
         <project.author>Huli</project.author>
     </properties>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
+        <defaultGoal>clean install</defaultGoal>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>

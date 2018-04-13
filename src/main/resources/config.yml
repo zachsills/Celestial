@@ -1,9 +1,31 @@
-database: # Our Mongo credentials
+# Mongo Information #
+# More DB options coming soon
+database:
   name: celestial
   address: localhost
   port: 27017
   auth:
     enabled: false
     authDb: admin
-    username: "zach"
-    password: "thegoat"
+    username: 'zach'
+    password: 'thegoat'
+
+# Server #
+# Important server information
+server:
+  name: Celestial
+  store: 'store.celestial.com'
+  website: 'celestial.com'
+  teamspeak: 'ts.celestial.com'
+  map:
+    number: 1
+    startDate: "2018-04-12 12:30"
+  color:
+    primary: '&5'
+    secondary: '&7'
+
+# Features #
+# What we want enabled/disabled
+features:
+  deathbans: true
+  scoreboard: true

@@ -1,6 +1,13 @@
 package me.hulipvp.celestial;
 
 import lombok.Getter;
+import me.hulipvp.celestial.factions.FactionManager;
+import me.hulipvp.celestial.listeners.ChatListener;
+import me.hulipvp.celestial.listeners.PlayerListener;
+import me.hulipvp.celestial.profile.ProfileManager;
+import me.hulipvp.celestial.storage.backend.IBackend;
+import me.hulipvp.celestial.storage.backend.MongoBackend;
+import me.hulipvp.celestial.util.Locale;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -27,25 +34,53 @@ import org.bukkit.plugin.java.JavaPlugin;
  * SOFTWARE.
  *
  * @author Zach Sills
+ * @version 1.0.0-DEV
+ * @since 2018-04-12
  */
 public class Celestial extends JavaPlugin {
 
     /* Our single plugin instance */
     @Getter private static Celestial instance;
 
+    /* Backend */
+    @Getter private IBackend backend;
+
+    /* Managers */
+    @Getter private FactionManager factionManager;
+    @Getter private ProfileManager profileManager;
+
     /**
-     * Method is called by the server when the plugin is being enabled
+     * This method is called by the server when the plugin is being enabled
      */
     @Override
     public void onEnable() {
         instance = this;
+
+        /* Load Storage objs */
+        Locale.load(false);
+
+        backend = new MongoBackend(this);
+        backend.loadFactions();
+
+        /* Instantiate Managers */
+        factionManager = new FactionManager();
+        profileManager = new ProfileManager();
+
+        /* Register Listeners */
+        getServer().getPluginManager().registerEvents(new ChatListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
     }
 
     /**
-     * Method is called by the server when the plugin is being disabled
+     * This method is called by the server when the plugin is being disabled
      */
     @Override
     public void onDisable() {
+        /* Save all of our Celestial objs to the database */
+        factionManager.forEach(backend::save);
+        profileManager.forEach(backend::save);
 
+        /* Close our database connection */
+        backend.close();
     }
 }
