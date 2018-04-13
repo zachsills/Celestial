@@ -31,3 +31,11 @@ Installation instructions:
 2. Clone the repo via either SSH, HTTPS, or if you're lazy, just use a Git program. Or you could be lazy and just download the source as one ZIP file.
 3. If you downloaded the ZIP, extract it into the directory of your choosing. Go into the main directory of the repo and then go to that directory in your Windows Command Prompt, Linux Console, or MacOS Terminal.
 4. From there, type in `mvn clean install` and Maven should automatically detect the pom.xml file inside of the root directory. Alternatively, if you do not wish to install it directly into your maven repository, simply type in `mvn clean package` instead.
+
+### FAQ
+
+1. How often will this be updated?
+
+    I will try my best to update this every day, if not, every other few days or so. I'm pretty busy with school, learning new languages, and/or eating in my free time so that's what I'll be doing if I'm not updating this.
+
+2. Haven't been asked anything other than that :(
