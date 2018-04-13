@@ -1,4 +1,4 @@
-package me.hulipvp.celestial.profile.data;
+package me.hulipvp.celestial.profile.data.type;
 
 import lombok.Getter;
 import org.apache.commons.lang.WordUtils;
@@ -13,7 +13,7 @@ import java.util.List;
  * talking in
  *
  */
-public enum ChatMode {
+public enum ChatType {
 
     PUBLIC("Global", ChatColor.GREEN, "p", "g", "public", "global"),
     FACTION("Faction", ChatColor.RED, "f", "t", "fac", "faction", "team"),
@@ -23,7 +23,7 @@ public enum ChatMode {
     @Getter private final ChatColor color;
     @Getter private final List<String> aliases;
 
-    ChatMode(final String friendlyName, final ChatColor color, final String... aliases) {
+    ChatType(final String friendlyName, final ChatColor color, final String... aliases) {
         this.friendlyName = friendlyName;
         this.color = color;
         this.aliases = Arrays.asList(aliases);
@@ -51,32 +51,32 @@ public enum ChatMode {
     }
 
     /**
-     * Returns the next {@link ChatMode} in a sequential order
+     * Returns the next {@link ChatType} in a sequential order
      *
      * @param mode
-     *          the provided mode that will be used to find the next {@link ChatMode}
+     *          the provided mode that will be used to find the next {@link ChatType}
      * @return
      *      the next mode that comes after the provided mode
      */
-    public ChatMode getNext(final ChatMode mode) {
-        final int modes = ChatMode.values().length;
+    public ChatType getNext(final ChatType mode) {
+        final int modes = ChatType.values().length;
 
-        return ChatMode.values()[mode.ordinal() + 1 >= modes ? 0 : mode.ordinal() + 1];
+        return ChatType.values()[mode.ordinal() + 1 >= modes ? 0 : mode.ordinal() + 1];
     }
 
     /**
      * Return a mode that contains the given alias<br>
-     * Will return <null>null</null> if no {@link ChatMode} is found with
+     * Will return <null>null</null> if no {@link ChatType} is found with
      * the given alias
      *
      * @param alias
      *          the mode you wish to find with the given alias
      * @return
-     *      an {@link ChatMode} if a mode with the given alias is found,
+     *      an {@link ChatType} if a mode with the given alias is found,
      *      otherwise null
      */
-    public ChatMode getByAlias(final String alias) {
-        return Arrays.stream(ChatMode.values())
+    public ChatType getByAlias(final String alias) {
+        return Arrays.stream(ChatType.values())
                 .filter(mode -> mode.getAliases().contains(alias))
                 .findFirst()
                 .orElse(null);

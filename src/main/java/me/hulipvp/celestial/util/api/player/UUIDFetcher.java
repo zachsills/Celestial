@@ -1,4 +1,4 @@
-package me.hulipvp.celestial.util;
+package me.hulipvp.celestial.util.api.player;
 
 import net.minecraft.util.com.google.gson.Gson;
 import net.minecraft.util.com.google.gson.GsonBuilder;
