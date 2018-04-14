@@ -1,7 +1,6 @@
 package me.hulipvp.celestial.profile.data.type;
 
 import lombok.Getter;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 
 import java.util.Arrays;
@@ -47,7 +46,7 @@ public enum ChatType {
      *      of the mode
      */
     public String getPrefix() {
-        return color + "(" + WordUtils.capitalize(friendlyName) + ") ";
+        return color + "(" + friendlyName + ") ";
     }
 
     /**

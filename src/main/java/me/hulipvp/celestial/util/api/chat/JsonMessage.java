@@ -1,6 +1,9 @@
 package me.hulipvp.celestial.util.api.chat;
 
+import net.minecraft.server.v1_7_R4.ChatSerializer;
+import net.minecraft.server.v1_7_R4.PacketPlayOutChat;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 
@@ -24,43 +27,25 @@ public class JsonMessage {
 		msg = "[{\"text\":\"\",\"extra\":[{\"text\": \"\"}";
 	}
 
-	private static Class<?> getNmsClass(final String nmsClassName) throws ClassNotFoundException {
-		return Class.forName("net.minecraft.server." + getServerVersion() + "." + nmsClassName);
-	}
-
-	private static String getServerVersion() {
-		return Bukkit.getServer().getClass().getPackage().getName().substring(23);
-	}
-
 	/**
 	 * Send the json string to all players on the server.
 	 */
 	public void send() {
 		final List<Object> players = new ArrayList<>();
-		for(final Player p : Bukkit.getServer().getOnlinePlayers())
-			players.add(p);
+		for(final Player player : Bukkit.getServer().getOnlinePlayers())
+			players.add(player);
 
 		send(players.toArray(new Player[players.size()]));
 	}
 
 	/**
 	 * Send the json string to specified player(s)
-	 * @param player to send the message to.
+	 * @param players
+	 * 			the player(s) to send the message to.
 	 */
-	public void send(final Player... player) {
-		String nmsClass = ((!getServerVersion().startsWith("v1_7_R")) ? "IChatBaseComponent$" : "") + "ChatSerializer";
-		for(final Player p : player) {
-			try {
-                final Object comp = getNmsClass(nmsClass).getMethod("a", String.class).invoke(null, msg + "]}]");
-                final Object packet = getNmsClass("PacketPlayOutChat").getConstructor(getNmsClass("IChatBaseComponent")).newInstance(comp);
-                final Object handle = p.getClass().getMethod("getHandle").invoke(p);
-                final Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
-
-				playerConnection.getClass().getMethod("sendPacket",getNmsClass("Packet")).invoke(playerConnection, packet);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	public void send(final Player... players) {
+		for(final Player player : players)
+			((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutChat(ChatSerializer.a(msg + "]}]")));
 	}
 
 	/**

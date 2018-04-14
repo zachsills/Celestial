@@ -2,16 +2,14 @@ package me.hulipvp.celestial.factions;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.hulipvp.celestial.api.object.CelestialObject;
 import me.hulipvp.celestial.factions.claim.Claim;
 import me.hulipvp.celestial.factions.type.FactionType;
-import me.hulipvp.celestial.api.object.CelestialObject;
 import me.hulipvp.celestial.util.LocationUtils;
 import org.bson.Document;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -21,8 +19,6 @@ import java.util.UUID;
  *
  */
 public abstract class Faction extends CelestialObject {
-
-    @Getter private static final Map<String, Faction> factions = new HashMap<>();
 
     @Getter private FactionType type;
 
@@ -39,17 +35,6 @@ public abstract class Faction extends CelestialObject {
         FactionManager.get().add(this);
     }
 
-    public static Faction getFaction(final UUID uuid) {
-        return factions.get(uuid.toString());
-    }
-
-    public static Faction getFaction(final String name) {
-        return factions.values().stream()
-                .filter(faction -> faction.getName().equals(name))
-                .findFirst()
-                .orElse(null);
-    }
-
     /**
      * Get an {@link UUID} to identify this Faction
      *
@@ -64,7 +49,7 @@ public abstract class Faction extends CelestialObject {
         if(uuid == null) {
             do {
                 finalUuid = UUID.randomUUID();
-            } while(getFaction(finalUuid) != null);
+            } while(FactionManager.get().get(finalUuid) != null);
         } else {
             finalUuid = uuid;
         }
