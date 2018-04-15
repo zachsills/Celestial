@@ -5,7 +5,7 @@ import me.hulipvp.celestial.util.Locale;
 public class LocaleFile extends Configuration {
 
     public LocaleFile(final boolean override) {
-        super("locale.yml");
+        super("locale");
 
         loadLocale(override);
     }

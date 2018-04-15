@@ -15,7 +15,7 @@ public enum SettingType {
     @Getter private final String key, friendlyName;
     @Getter private final boolean defaultValue;
 
-    SettingType(final String friendlyName, final String key) {
+    SettingType(final String key, final String friendlyName) {
         this.key = key;
         this.friendlyName = friendlyName;
         this.defaultValue = true;

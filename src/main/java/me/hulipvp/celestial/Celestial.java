@@ -57,6 +57,8 @@ public class Celestial extends JavaPlugin {
         instance = this;
 
         /* Load Storage objs */
+        saveDefaultConfig();
+
         Locale.load(false);
 
         backend = new MongoBackend(this);

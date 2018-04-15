@@ -53,8 +53,8 @@ public class MongoBackend implements IBackend<CelestialObject> {
             profiles = database.getCollection("profiles");
 
             collections = new HashMap<>();
-            collections.put(Profile.class, factions);
-            collections.put(Faction.class, profiles);
+            collections.put(Profile.class, profiles);
+            collections.put(Faction.class, factions);
 
             return true;
         } catch(final Exception ex) {
